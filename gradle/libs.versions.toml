@@ -34,3 +34,4 @@ decompose-decompose = { group = "com.arkivanov.decompose", name = "decompose", v
 decompose-extensionsComposeJetbrains = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
 
 essenty-lifecycle = { group = "com.arkivanov.essenty", name = "lifecycle", version.ref = "essenty" }
+kotlin-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0"

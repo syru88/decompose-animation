@@ -5,18 +5,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.subscribeAsState
+import androidx.compose.ui.graphics.Color
 import com.example.myapplication.shared.welcome.PreviewWelcomeComponent
 import com.example.myapplication.shared.welcome.WelcomeComponent
 
@@ -25,21 +20,12 @@ internal fun WelcomeContent(
     component: WelcomeComponent,
     modifier: Modifier = Modifier,
 ) {
-    val model by component.model.subscribeAsState()
-
     Scaffold(
         modifier = modifier,
+        backgroundColor = Color.Yellow,
         topBar = {
             TopAppBar(
                 title = { Text(text = "Welcome Screen") },
-                navigationIcon = {
-                    IconButton(onClick = component::onBackClicked) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                            contentDescription = "Back button",
-                        )
-                    }
-                },
             )
         },
     ) {
@@ -49,9 +35,9 @@ internal fun WelcomeContent(
             verticalArrangement = Arrangement.Center,
         ) {
             Button(
-                onClick = { component.onUpdateGreetingText() },
+                onClick = component::onBackClicked,
             ) {
-                Text(model.greetingText)
+                Text("Main screen")
             }
         }
     }

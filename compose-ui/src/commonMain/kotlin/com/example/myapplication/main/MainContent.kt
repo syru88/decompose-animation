@@ -22,7 +22,7 @@ internal fun MainContent(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Decompose Template") },
+                title = { Text(text = "Decompose Template: ${component.counter}") },
             )
         },
     ) {

@@ -4,9 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.popTo
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import com.example.myapplication.shared.main.DefaultMainComponent
 import com.example.myapplication.shared.main.MainComponent
@@ -30,22 +29,28 @@ class DefaultRootComponent(
             childFactory = ::child,
         )
 
+    private var mainCounter = 0
+
     private fun child(config: Config, childComponentContext: ComponentContext): Child =
         when (config) {
-            is Config.Main -> Child.Main(mainComponent(childComponentContext))
+            is Config.Main -> {
+                Child.Main(mainComponent(childComponentContext))
+            }
+
             is Config.Welcome -> Child.Welcome(welcomeComponent(childComponentContext))
         }
 
     private fun mainComponent(componentContext: ComponentContext): MainComponent =
         DefaultMainComponent(
             componentContext = componentContext,
-            onShowWelcome = { navigation.push(Config.Welcome) },
+            counter = ++mainCounter,
+            onShowWelcome = { navigation.replaceAll(Config.Welcome) },
         )
 
     private fun welcomeComponent(componentContext: ComponentContext): WelcomeComponent =
         DefaultWelcomeComponent(
             componentContext = componentContext,
-            onFinished = navigation::pop,
+            onFinished = { navigation.replaceAll(Config.Main) },
         )
 
     override fun onBackClicked(toIndex: Int) {
