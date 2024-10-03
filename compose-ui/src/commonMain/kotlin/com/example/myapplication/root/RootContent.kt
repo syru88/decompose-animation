@@ -28,7 +28,7 @@ fun RootContent(
             Children(
                 stack = component.stack,
                 modifier = Modifier.fillMaxSize(),
-                animation = stackAnimation(fade() + scale())
+                animation = stackAnimation(fade())
             ) {
                 when (val instance = it.instance) {
                     is Child.Main -> MainContent(component = instance.component)

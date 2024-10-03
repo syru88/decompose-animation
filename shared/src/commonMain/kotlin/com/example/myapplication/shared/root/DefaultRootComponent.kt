@@ -12,6 +12,10 @@ import com.example.myapplication.shared.main.MainComponent
 import com.example.myapplication.shared.root.RootComponent.Child
 import com.example.myapplication.shared.welcome.DefaultWelcomeComponent
 import com.example.myapplication.shared.welcome.WelcomeComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 class DefaultRootComponent(
@@ -44,7 +48,13 @@ class DefaultRootComponent(
         DefaultMainComponent(
             componentContext = componentContext,
             counter = ++mainCounter,
-            onShowWelcome = { navigation.replaceAll(Config.Welcome) },
+            onShowWelcome = {
+                CoroutineScope(Dispatchers.Main).launch {
+                    navigation.replaceAll(Config.Welcome)
+                    delay(50)
+                    navigation.replaceAll(Config.Main)
+                }
+            },
         )
 
     private fun welcomeComponent(componentContext: ComponentContext): WelcomeComponent =
