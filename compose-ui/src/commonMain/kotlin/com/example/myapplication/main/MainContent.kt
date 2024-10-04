@@ -1,6 +1,7 @@
 package com.example.myapplication.main
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -24,10 +25,12 @@ internal fun MainContent(
             )
         },
     ) {
-        Box(
+        Column(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            InnerContent(component.innerComponent)
             Button(onClick = component::onShowWelcomeClicked) {
                 Text(text = "Show Welcome screen")
             }
