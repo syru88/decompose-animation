@@ -1,6 +1,7 @@
 package com.example.myapplication.shared.main
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.childContext
 
 interface MainComponent {
 
@@ -16,7 +17,7 @@ class DefaultMainComponent(
     private val onShowWelcome: () -> Unit,
 ) : MainComponent, ComponentContext by componentContext {
 
-    override val innerComponent = DefaultInnerComponent(counter, componentContext)
+    override val innerComponent = DefaultInnerComponent(counter, childContext("counter"))
 
     override fun onShowWelcomeClicked() {
         onShowWelcome()
