@@ -1,6 +1,5 @@
 package com.example.myapplication.welcome
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.myapplication.shared.welcome.PreviewWelcomeComponent
 import com.example.myapplication.shared.welcome.WelcomeComponent
 
 @Composable
@@ -41,10 +39,4 @@ internal fun WelcomeContent(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun WelcomePreview() {
-    WelcomeContent(PreviewWelcomeComponent)
 }
