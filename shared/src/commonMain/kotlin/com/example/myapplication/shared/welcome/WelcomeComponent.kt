@@ -19,7 +19,8 @@ class DefaultWelcomeComponent(
 
     init {
         CoroutineScope(Dispatchers.Main).launch {
-            delay(50)
+            // delay(500)
+            delay(100)
             onFinished()
         }
     }
