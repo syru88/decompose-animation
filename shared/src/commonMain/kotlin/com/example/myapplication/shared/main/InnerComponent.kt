@@ -17,14 +17,14 @@ interface InnerComponent {
 
 }
 
-class DefaultInnerComponent(private val counter: Int, componentContext: ComponentContext) :
+class DefaultInnerComponent(counter: Int, componentContext: ComponentContext) :
     InnerComponent,
     ComponentContext by componentContext {
 
     @Serializable
     private sealed interface InnerConfig {
         @Serializable
-        data object InnerMain : InnerConfig
+        data class InnerMain(val counter: Int) : InnerConfig
     }
 
     private val navigation = StackNavigation<InnerConfig>()
@@ -32,14 +32,14 @@ class DefaultInnerComponent(private val counter: Int, componentContext: Componen
     override val stack: Value<ChildStack<*, InnerChild>> = childStack(
         source = navigation,
         serializer = InnerConfig.serializer(),
-        initialConfiguration = InnerConfig.InnerMain,
+        initialConfiguration = InnerConfig.InnerMain(counter),
         handleBackButton = true,
         childFactory = ::child
     )
 
     private fun child(config: InnerConfig, componentContext: ComponentContext): InnerChild =
         when (config) {
-            InnerConfig.InnerMain -> InnerChild.InnerMain(counter)
+            is InnerConfig.InnerMain -> InnerChild.InnerMain(config.counter)
         }
 
 }
